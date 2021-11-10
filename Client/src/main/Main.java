@@ -9,11 +9,12 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 
+	private static String[] test = {"del_irgendwas", "get_irgendwas", "new_irgendwas", "ans_irgendwas", "unbekannt"};
+	
 	public static void main(String[] args) {
 		System.out.println("CLIENT");
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < test.length; i++) {
 			try {
-				TimeUnit.SECONDS.sleep(5);
 				
 				int port = 9090;
 				InetAddress address = InetAddress.getByName("127.0.0.1");
@@ -21,10 +22,10 @@ public class Main {
 				OutputStream out = socket.getOutputStream();
 				BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
 				
-				String output = "ICH BIN NUMMER " + (i+1);
-				writer.write(output);
+				writer.write(test[i]);
 				writer.flush();
-				
+				TimeUnit.SECONDS.sleep(1);
+					
 				socket.close();
 			} catch (Exception e) {
 				e.printStackTrace();
