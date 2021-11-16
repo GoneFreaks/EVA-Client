@@ -18,6 +18,9 @@ public class Main {
 				MessageManager.sendMessage("get");
 				TimeUnit.SECONDS.sleep(1);
 				System.out.println(MessageManager.receiveMessage());
+				TimeUnit.DAYS.sleep(10);
+				MessageManager.sendMessage("delete");
+				TimeUnit.SECONDS.sleep(1);
 				server.close();
 			}
 		} catch (Exception e) {
