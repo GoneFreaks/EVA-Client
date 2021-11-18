@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 
 import main.MessageManager;
 
-public class StartUpDTO {
+public class WaitingView implements View {
 
 	private static final String[] STARTUP_LABELS = {"ID: ...", "RELOAD",
 			"", "REQUEST",
@@ -21,13 +21,16 @@ public class StartUpDTO {
 	private List<JComboBox<String>> selection;
 	private List<JButton> buttons;
 	private JLabel id;
+	private JFrame frame;
 	
-	
-	private final JFrame frame;
-	public StartUpDTO (JFrame frame) {
-		this.frame = frame;
+	public WaitingView () {
 		selection = new ArrayList<>();
 		buttons = new ArrayList<>();
+	}
+	
+	public View setFrame(JFrame frame, String id) {
+		this.frame = frame;
+		return this;
 	}
 	
 	private void handleAction (ActionEvent a) {
@@ -39,7 +42,7 @@ public class StartUpDTO {
 			case "RELOAD": {
 				new Thread(() -> {
 					try {
-						TimeUnit.SECONDS.sleep(5);
+						TimeUnit.SECONDS.sleep(1);
 					} catch (Exception e) {
 					}
 					enableButtons(true);
@@ -48,17 +51,21 @@ public class StartUpDTO {
 				break;
 			}
 			case "REQUEST": {
-				MessageManager.sendMessage("req" + selection.get(0).getSelectedItem());
+				Object value = selection.get(0).getSelectedItem();
+				if(value == null) enableButtons(true);
+				else MessageManager.sendMessage("req" + value);
 				break;
 			}
 			case "ACCEPT": {
-				System.out.println(selection.get(1).getSelectedItem());
+				Object value = selection.get(1).getSelectedItem();
+				if(value == null) enableButtons(true);
+				else MessageManager.sendMessage("acc" + value);
 				break;
 			}
 		}
 	}
 	
-	public void startUp() {
+	public void start() {
 		
 		frame.setLayout(new GridLayout(3, 2));
 		
@@ -87,24 +94,13 @@ public class StartUpDTO {
 		frame.setVisible(true);
 	}
 	
-	public void shutdown() {
-		frame.removeAll();
+	public String shutdown() {
 		frame.setVisible(false);
+		frame.removeAll();
+		return id.getText();
 	}
 	
-	public void setId (String id) {
-		this.id.setText(this.id.getText().substring(0, 4) + id);
-	}
-	
-	public void addPlayer(String playerId) {
-		selection.get(0).addItem(playerId);
-	}
-	
-	public void addInvite(String invite) {
-		selection.get(1).addItem(invite);
-	}
-	
-	public void enableButtons(boolean state) {
+	private void enableButtons(boolean state) {
 		for (JButton i : buttons) i.setEnabled(state);
 	}
 	
@@ -123,6 +119,7 @@ public class StartUpDTO {
 							String temp = args[j].trim();
 							if(temp.equals(id.getText())) continue;
 							selection.get(i).removeItem(temp);
+							if(i == 1) selection.get(0).removeItem(temp);
 							selection.get(i).addItem(temp);
 						}
 					}
