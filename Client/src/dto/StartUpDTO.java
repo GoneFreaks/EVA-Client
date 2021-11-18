@@ -4,11 +4,14 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import main.MessageManager;
 
 public class StartUpDTO {
 
@@ -34,11 +37,18 @@ public class StartUpDTO {
 		JButton pressed = (JButton) a.getSource();
 		switch (pressed.getText()) {
 			case "RELOAD": {
-				System.out.println("RELOAD DATA");
+				new Thread(() -> {
+					try {
+						TimeUnit.SECONDS.sleep(5);
+					} catch (Exception e) {
+					}
+					enableButtons(true);
+				}).start();
+				MessageManager.sendMessage("get");
 				break;
 			}
 			case "REQUEST": {
-				System.out.println(selection.get(0).getSelectedItem());
+				MessageManager.sendMessage("req" + selection.get(0).getSelectedItem());
 				break;
 			}
 			case "ACCEPT": {
@@ -95,8 +105,30 @@ public class StartUpDTO {
 	}
 	
 	public void enableButtons(boolean state) {
-		for (JButton i : buttons) {
-			i.setEnabled(state);
+		for (JButton i : buttons) i.setEnabled(state);
+	}
+	
+	public void showData(String input) {
+		if(input.startsWith("#")) id.setText(input.trim());
+		else {
+			String cmd = input.substring(0, 3);
+			String data = input.substring(3);
+			
+			switch (cmd) {
+				case "get": {
+					String[] both = data.split(",,");
+					for(int i = 0; i < both.length; i++) {
+						String[] args = both[i].split(",");
+						for (int j = 0; j < args.length; j++) {
+							String temp = args[j].trim();
+							if(temp.equals(id.getText())) continue;
+							selection.get(i).removeItem(temp);
+							selection.get(i).addItem(temp);
+						}
+					}
+					break;
+				}
+			}
 		}
 	}
 	

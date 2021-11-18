@@ -24,7 +24,7 @@ public class MessageManager {
 		StringBuilder b = new StringBuilder("");
 		
 		String line;
-		while(in.ready() && (line = in.readLine()) != null) b.append(line + "\n");
+		while(in.ready() && (line = in.readLine()) != null) b.append(b.length() > 0? "\n" : "" + line);
 		
 		return b.toString();
 	}

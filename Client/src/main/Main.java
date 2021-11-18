@@ -2,10 +2,11 @@ package main;
 
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Main {
 
+	private static ViewManager viewMan;
+	
 	public static void main(String[] args) {
 		System.out.println("CLIENT");
 		
@@ -14,19 +15,11 @@ public class Main {
 			if((server = connect()) != null) {
 				server.setKeepAlive(true);
 				MessageManager.startUp(server.getOutputStream(), server.getInputStream());
-				Thread listener = new Thread(new Listener());
+				viewMan = new ViewManager();
+				viewMan.start();
+				Thread listener = new Thread(new Listener(viewMan));
 				listener.setDaemon(true);
 				listener.start();
-				
-				Scanner sc = new Scanner(System.in);
-				String cmd;
-				
-				while(true) {
-					cmd = sc.next();
-					if(cmd.toLowerCase().equals("exit")) break;
-					MessageManager.sendMessage(cmd);
-				}
-				sc.close();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

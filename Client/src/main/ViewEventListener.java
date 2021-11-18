@@ -12,7 +12,7 @@ public class ViewEventListener implements WindowListener{
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		System.out.println("SEND DELETE TO SERVER");
+		MessageManager.sendMessage("delete");
 	}
 
 	@Override

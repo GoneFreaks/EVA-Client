@@ -6,21 +6,22 @@ import dto.StartUpDTO;
 
 public class ViewManager {
 
-	private static JFrame frame = new JFrame("Client");
-	private static StartUpDTO startUp;
+	private JFrame frame;
+	private StartUpDTO startUp;
 	
-	public static void main(String[] args) throws Exception {
+	public ViewManager () {
+		frame = new JFrame("EVA");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.addWindowListener(new ViewEventListener());
-		
+	}
+	
+	public void start () {
 		startUp = new StartUpDTO(frame);
 		startUp.startUp();
-		Thread.sleep(5000);
-		startUp.setId("KEVIN");
-		for (int i = 0; i < 8; i++) {
-			startUp.addInvite("INVITE " + i);
-			startUp.addPlayer("PLAYER " + i);
-		}
-		startUp.enableButtons(true);
 	}
+	
+	public void showData(String input) {
+		startUp.showData(input);
+	}
+	
 }
