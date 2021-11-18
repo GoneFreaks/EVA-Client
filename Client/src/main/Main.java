@@ -2,7 +2,7 @@ package main;
 
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
 
 public class Main {
 
@@ -14,14 +14,19 @@ public class Main {
 			if((server = connect()) != null) {
 				server.setKeepAlive(true);
 				MessageManager.startUp(server.getOutputStream(), server.getInputStream());
-				System.out.println(MessageManager.receiveMessage());
-				MessageManager.sendMessage("get");
-				TimeUnit.SECONDS.sleep(1);
-				System.out.println(MessageManager.receiveMessage());
-				TimeUnit.DAYS.sleep(10);
-				MessageManager.sendMessage("delete");
-				TimeUnit.SECONDS.sleep(1);
-				server.close();
+				Thread listener = new Thread(new Listener());
+				listener.setDaemon(true);
+				listener.start();
+				
+				Scanner sc = new Scanner(System.in);
+				String cmd;
+				
+				while(true) {
+					cmd = sc.next();
+					if(cmd.toLowerCase().equals("exit")) break;
+					MessageManager.sendMessage(cmd);
+				}
+				sc.close();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
