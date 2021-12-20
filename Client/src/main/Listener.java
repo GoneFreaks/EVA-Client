@@ -14,7 +14,7 @@ public class Listener implements Runnable {
 	public void run() {
 		try {
 			while(true) {
-				String out = MessageManager.receiveMessage();
+				String out = MessageManager.INSTANCE.receiveMessage();
 				if(out.length() > 0) viewMan.showData(out);
 				TimeUnit.MILLISECONDS.sleep(100);
 			}

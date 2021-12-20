@@ -4,7 +4,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,7 +14,7 @@ import main.MessageManager;
 
 public class WaitingView implements View {
 
-	private static final String[] STARTUP_LABELS = {"ID: ...", "RELOAD",
+	private static final String[] STARTUP_LABELS = {"ID: ...", "",
 			"", "REQUEST",
 			"", "ACCEPT"};
 	private List<JComboBox<String>> selection;
@@ -39,27 +38,16 @@ public class WaitingView implements View {
 		
 		JButton pressed = (JButton) a.getSource();
 		switch (pressed.getText()) {
-			case "RELOAD": {
-				new Thread(() -> {
-					try {
-						TimeUnit.SECONDS.sleep(1);
-					} catch (Exception e) {
-					}
-					enableButtons(true);
-				}).start();
-				MessageManager.sendMessage("get");
-				break;
-			}
 			case "REQUEST": {
 				Object value = selection.get(0).getSelectedItem();
 				if(value == null) enableButtons(true);
-				else MessageManager.sendMessage("req" + value);
+				else MessageManager.INSTANCE.sendMessage("req" + value);
 				break;
 			}
 			case "ACCEPT": {
 				Object value = selection.get(1).getSelectedItem();
 				if(value == null) enableButtons(true);
-				else MessageManager.sendMessage("acc" + value);
+				else MessageManager.INSTANCE.sendMessage("acc" + value);
 				break;
 			}
 		}
@@ -71,15 +59,18 @@ public class WaitingView implements View {
 		
 		for (int i = 0; i < 6; i++) {
 			String label = STARTUP_LABELS[i];
-			if(i % 2 == 0) {
+			if(i % 2 == 0 || i <  2) {
 				if(i == 0) {
 					id = new JLabel(label);
 					frame.add(id);
 				}
 				else {
-					JComboBox<String> temp = new JComboBox<String>();
-					selection.add(temp);
-					frame.add(temp);
+					if(i == 1) frame.add(new JLabel(label));
+					else {
+						JComboBox<String> temp = new JComboBox<String>();
+						selection.add(temp);
+						frame.add(temp);
+					}
 				}
 			}
 			else {

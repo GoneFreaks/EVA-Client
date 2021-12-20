@@ -14,12 +14,15 @@ public class Main {
 			Socket server;
 			if((server = connect()) != null) {
 				server.setKeepAlive(true);
-				MessageManager.startUp(server.getOutputStream(), server.getInputStream());
+				new MessageManager(server.getOutputStream(), server.getInputStream());
 				viewMan = new ViewManager();
 				viewMan.start();
 				Thread listener = new Thread(new Listener(viewMan));
+				Thread getThread = new Thread(new GetThread());
 				listener.setDaemon(true);
+				getThread.setDaemon(true);
 				listener.start();
+				getThread.start();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

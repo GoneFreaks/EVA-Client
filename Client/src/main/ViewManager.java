@@ -21,10 +21,11 @@ public class ViewManager {
 	}
 	
 	public void showData(String input) {
+		System.out.println(input);
 		String cmd = input.substring(0, 3);
 		if(cmd.equals("acc")) {
 			setGameView();
-		}
+		}	
 		view.showData(input);
 	}
 	
@@ -36,10 +37,12 @@ public class ViewManager {
 	}
 	
 	public void setGameView() {
+		System.out.println("GAME");
 		frame = initFrame();
 		String id = view.shutdown();
 		view = new GameView();
 		view.setFrame(frame, id).start();
+		GetThread.run = false;
 	}
 	
 	public JFrame initFrame() {

@@ -8,19 +8,22 @@ import java.io.PrintWriter;
 
 public class MessageManager {
 
-	private static PrintWriter out;
-	private static BufferedReader in;
+	public static MessageManager INSTANCE;
 	
-	public static void startUp(OutputStream outStream, InputStream inStream) {
+	private PrintWriter out;
+	private BufferedReader in;
+	
+	public MessageManager(OutputStream outStream, InputStream inStream) {
+		INSTANCE = this;
 		out = new PrintWriter(outStream, true);
 		in = new BufferedReader(new InputStreamReader(inStream));
 	}
 	
-	public static void sendMessage(String message) {
+	public synchronized void sendMessage(String message) {
 		out.println(message);
 	}
 	
-	public static String receiveMessage() throws Exception {
+	public String receiveMessage() throws Exception {
 		StringBuilder b = new StringBuilder("");
 		
 		String line;
