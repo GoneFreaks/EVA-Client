@@ -32,7 +32,7 @@ public class Main {
 	
 	private static Socket connect() {
 		try {
-			return new Socket(InetAddress.getByName("127.0.0.1"), 9090);
+			return new Socket(InetAddress.getByName("192.168.178.48"), 9090);
 		} catch (Exception e) {
 			return null;
 		}

@@ -88,7 +88,9 @@ public class GameView implements View{
 
 	@Override
 	public String shutdown() {
-		return null;
+		frame.setVisible(false);
+		frame.removeAll();
+		return id;
 	}
 
 	@Override
@@ -126,10 +128,15 @@ public class GameView implements View{
 				StringBuilder b = new StringBuilder("");
 				for (int i = 0; i < args.length; i++) {
 					String[] temp = args[i].split(",");
-					if(temp[0].equals(id)) b.append("Spieler: " + temp[1] + (b.length() > 0? "":"\t"));
-					else b.append("Gegner: " + temp[1] + (b.length() > 0? "":"\t"));
+					if(temp[0].equals(id)) b.append("Spieler: " + temp[1] + (b.length() > 0? "":"    "));
+					else b.append("Gegner: " + temp[1] + (b.length() > 0? "":"    "));
 				}
 				result_label.setText(b.toString());
+				try {
+					TimeUnit.SECONDS.sleep(5);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}

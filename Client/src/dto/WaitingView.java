@@ -21,6 +21,7 @@ public class WaitingView implements View {
 	private List<JButton> buttons;
 	private JLabel id;
 	private JFrame frame;
+	private String id_text;
 	
 	public WaitingView () {
 		selection = new ArrayList<>();
@@ -29,6 +30,7 @@ public class WaitingView implements View {
 	
 	public View setFrame(JFrame frame, String id) {
 		this.frame = frame;
+		this.id_text = id;
 		return this;
 	}
 	
@@ -61,7 +63,7 @@ public class WaitingView implements View {
 			String label = STARTUP_LABELS[i];
 			if(i % 2 == 0 || i <  2) {
 				if(i == 0) {
-					id = new JLabel(label);
+					id = new JLabel(id_text != null? id_text : label);
 					frame.add(id);
 				}
 				else {

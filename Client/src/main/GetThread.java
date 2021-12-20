@@ -4,12 +4,12 @@ import java.util.concurrent.TimeUnit;
 
 public class GetThread implements Runnable {
 
-	public static boolean run = true;
+	public static boolean running = true;
 	
 	@Override
 	public void run() {
 		try {
-			while(run) {
+			while(running) {
 				TimeUnit.MILLISECONDS.sleep(1000);
 				MessageManager.INSTANCE.sendMessage("get");
 			}
