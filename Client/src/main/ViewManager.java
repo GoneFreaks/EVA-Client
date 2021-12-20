@@ -21,7 +21,6 @@ public class ViewManager {
 	}
 	
 	public void showData(String input) {
-		System.out.println(input);
 		String cmd = input.substring(0, 3);
 		if(cmd.equals("acc")) {
 			setGameView();
@@ -37,7 +36,6 @@ public class ViewManager {
 	}
 	
 	public void setGameView() {
-		System.out.println("GAME");
 		frame = initFrame();
 		String id = view.shutdown();
 		view = new GameView();

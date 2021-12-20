@@ -20,6 +20,9 @@ public class GameView implements View{
 	private JLabel question;
 	private JFrame frame;
 	private QuestionDTO current;
+	private String id;
+	
+	private JLabel result_label;
 	
 	public GameView () {
 		this.buttons = new ArrayList<>();
@@ -33,6 +36,10 @@ public class GameView implements View{
 				if(i == 2) {
 					question = new JLabel("FRAGE");
 					frame.add(question);
+				}
+				else if(i == 1) {
+					result_label = new JLabel("");
+					frame.add(result_label);
 				}
 				else frame.add(new JLabel(""));
 			}
@@ -78,12 +85,6 @@ public class GameView implements View{
 	public void resetButtonColor() {
 		for (JButton i : buttons) i.setBackground(Color.WHITE);
 	}
-	
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("EVA");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		new GameView().setFrame(frame, null).start();
-	}
 
 	@Override
 	public String shutdown() {
@@ -94,6 +95,7 @@ public class GameView implements View{
 	public View setFrame(JFrame frame, String id) {
 		this.frame = frame;
 		this.frame.add(new JLabel(id));
+		this.id = id;
 		return this;
 	}
 
@@ -101,21 +103,33 @@ public class GameView implements View{
 	public void showData(String input) {
 		if(input.startsWith("get")) return;
 		else {
-			input = input.substring(3);
-			String[] args = input.split(",");
-			
-			enableButtons(true);
-			resetButtonColor();
-			List<Integer> random_order = new ArrayList<>();
-			random_order.add(0);
-			random_order.add(1);
-			random_order.add(2);
-			random_order.add(3);
-			Collections.shuffle(random_order);
-			current.StringToDTO(args);
-			for (int i = 0; i < args.length; i++) {
-				if(i == 0) question.setText(args[i]);
-				else buttons.get(random_order.remove(0)).setText(args[i]);
+			if(input.startsWith("gam") || input.startsWith("ans")) {
+				input = input.substring(3);
+				String[] args = input.split(",");
+				enableButtons(true);
+				resetButtonColor();
+				List<Integer> random_order = new ArrayList<>();
+				random_order.add(0);
+				random_order.add(1);
+				random_order.add(2);
+				random_order.add(3);
+				Collections.shuffle(random_order);
+				current.StringToDTO(args);
+				for (int i = 0; i < args.length; i++) {
+					if(i == 0) question.setText(args[i]);
+					else buttons.get(random_order.remove(0)).setText(args[i]);
+				}	
+			}
+			if(input.startsWith("res")) {
+				input = input.substring(3);
+				String[] args = input.split(",,");
+				StringBuilder b = new StringBuilder("");
+				for (int i = 0; i < args.length; i++) {
+					String[] temp = args[i].split(",");
+					if(temp[0].equals(id)) b.append("Spieler: " + temp[1] + (b.length() > 0? "":"\t"));
+					else b.append("Gegner: " + temp[1] + (b.length() > 0? "":"\t"));
+				}
+				result_label.setText(b.toString());
 			}
 		}
 	}
