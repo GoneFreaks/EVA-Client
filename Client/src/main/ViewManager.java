@@ -8,7 +8,7 @@ import dto.WaitingView;
 
 public class ViewManager {
 
-	private JFrame frame;
+	private static JFrame frame;
 	private View view;
 	
 	public ViewManager () {
@@ -30,6 +30,9 @@ public class ViewManager {
 			MessageManager.INSTANCE.sendMessage("new");
 			setWaitingView();
 		}
+		if(cmd.equals("unl")) {
+			view.enableButtons(true);
+		}
 	}
 	
 	public void setWaitingView() {
@@ -38,7 +41,6 @@ public class ViewManager {
 		view = new WaitingView();
 		view.setFrame(frame, id).start();
 		Thread getThread = new Thread(new GetThread());
-		GetThread.running = true;
 		getThread.setDaemon(true);
 		getThread.start();
 	}
@@ -53,6 +55,7 @@ public class ViewManager {
 	
 	public JFrame initFrame() {
 		JFrame init = new JFrame("EVA");
+		init.setResizable(false);
 		init.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		init.addWindowListener(new ViewEventListener());
 		return init;

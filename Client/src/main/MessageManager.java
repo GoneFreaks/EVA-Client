@@ -1,35 +1,26 @@
 package main;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 
 public class MessageManager {
 
 	public static MessageManager INSTANCE;
 	
-	private PrintWriter out;
-	private BufferedReader in;
+	private OutputStream out;
 	
-	public MessageManager(OutputStream outStream, InputStream inStream) {
+	public MessageManager(OutputStream out) {
 		INSTANCE = this;
-		out = new PrintWriter(outStream, true);
-		in = new BufferedReader(new InputStreamReader(inStream));
+		this.out = out;
 	}
 	
 	public synchronized void sendMessage(String message) {
-		out.println(message);
-	}
-	
-	public String receiveMessage() throws Exception {
-		StringBuilder b = new StringBuilder("");
-		
-		String line;
-		while(in.ready() && (line = in.readLine()) != null) b.append(b.length() > 0? "\n" : "" + line);
-		
-		return b.toString();
+		byte[] output = message.getBytes();
+		try {
+			out.write(output);
+			out.flush();
+		} catch (Exception e) {
+			System.exit(1);
+		}
 	}
 	
 }

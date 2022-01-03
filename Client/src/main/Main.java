@@ -12,12 +12,12 @@ public class Main {
 		
 		try{
 			Socket server;
-			if((server = connect()) != null) {
+			if((server = new Socket(InetAddress.getByName("127.0.0.1"), 9090)) != null) {
 				server.setKeepAlive(true);
-				new MessageManager(server.getOutputStream(), server.getInputStream());
+				new MessageManager(server.getOutputStream());
 				viewMan = new ViewManager();
 				viewMan.start();
-				Thread listener = new Thread(new Listener(viewMan));
+				Thread listener = new Thread(new Listener(viewMan, server.getInputStream()));
 				Thread getThread = new Thread(new GetThread());
 				listener.setDaemon(true);
 				getThread.setDaemon(true);
@@ -27,14 +27,6 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return;
-		}
-	}
-	
-	private static Socket connect() {
-		try {
-			return new Socket(InetAddress.getByName("192.168.178.48"), 9090);
-		} catch (Exception e) {
-			return null;
 		}
 	}
 }

@@ -93,7 +93,7 @@ public class WaitingView implements View {
 		return id.getText();
 	}
 	
-	private void enableButtons(boolean state) {
+	public void enableButtons(boolean state) {
 		for (JButton i : buttons) i.setEnabled(state);
 	}
 	
@@ -105,14 +105,17 @@ public class WaitingView implements View {
 			
 			switch (cmd) {
 				case "get": {
+					
+					selection.forEach((k) -> {
+						k.removeAllItems();
+					});
+					
 					String[] both = data.split(",,");
 					for(int i = 0; i < both.length; i++) {
 						String[] args = both[i].split(",");
 						for (int j = 0; j < args.length; j++) {
 							String temp = args[j].trim();
 							if(temp.equals(id.getText())) continue;
-							selection.get(i).removeItem(temp);
-							if(i == 1) selection.get(0).removeItem(temp);
 							selection.get(i).addItem(temp);
 						}
 					}
