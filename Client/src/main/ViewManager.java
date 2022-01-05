@@ -5,9 +5,7 @@ import javax.swing.JFrame;
 import dto.GameView;
 import dto.View;
 import dto.WaitingView;
-import main.listener.GetThread;
 import main.listener.ViewEventListener;
-import main.util.MessageManager;
 
 public class ViewManager {
 
@@ -33,18 +31,7 @@ public class ViewManager {
 	}
 	
 	public void showData(String input) {
-		String cmd = input.substring(0, 3);
 		view.showData(input);
-		if(cmd.equals("acc")) {
-			setGameView();
-		}
-		if(cmd.equals("res")) {
-			MessageManager.INSTANCE.sendMessage("new");
-			setWaitingView();
-		}
-		if(cmd.equals("unl")) {
-			view.enableButtons(true);
-		}
 	}
 	
 	public void setWaitingView() {
@@ -53,11 +40,6 @@ public class ViewManager {
 		String id = view.shutdown();
 		view = new WaitingView();
 		view.setFrame(frame, id).start();
-		
-		Thread getThread = new Thread(new GetThread());
-		GetThread.running = true;
-		getThread.setDaemon(true);
-		getThread.start();
 	}
 	
 	public void setGameView() {
@@ -66,7 +48,6 @@ public class ViewManager {
 		String id = view.shutdown();
 		view = new GameView();
 		view.setFrame(frame, id).start();
-		GetThread.running = false;
 	}
 	
 	public JFrame initFrame() {
