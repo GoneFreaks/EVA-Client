@@ -98,7 +98,7 @@ public class WaitingView implements View {
 	}
 	
 	public void showData(String input) {
-		if(input.startsWith("#") && !id.getText().startsWith("#")) id.setText(input.trim());
+		if(input.startsWith("@") && !id.getText().startsWith("@")) id.setText(input.trim());
 		
 		selection.forEach((k) -> {
 			k.removeAllItems();

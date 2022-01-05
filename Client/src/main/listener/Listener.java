@@ -24,7 +24,10 @@ public class Listener implements Runnable {
 					for (int i = 0; i < arr.length; i++) {
 						b.append((char) arr[i]);
 					}
-					CommandManager.INSTANCE.performCommand(b.toString());
+					String[] temp = b.toString().substring(1).split("#");
+					for (int i = 0; i < temp.length; i++) {
+						CommandManager.INSTANCE.performCommand(temp[i].trim());
+					}
 				}
 				TimeUnit.MILLISECONDS.sleep(10);
 			}
