@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -12,7 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import main.MessageManager;
+import main.commands.helper.GameViewHelper;
+import main.util.MessageManager;
 
 public class GameView implements View{
 
@@ -103,40 +103,24 @@ public class GameView implements View{
 
 	@Override
 	public void showData(String input) {
-		if(input.startsWith("get")) return;
-		else {
-			if(input.startsWith("gam") || input.startsWith("ans")) {
-				input = input.substring(3);
-				String[] args = input.split(",");
-				enableButtons(true);
-				resetButtonColor();
-				List<Integer> random_order = new ArrayList<>();
-				random_order.add(0);
-				random_order.add(1);
-				random_order.add(2);
-				random_order.add(3);
-				Collections.shuffle(random_order);
-				current.StringToDTO(args);
-				for (int i = 0; i < args.length; i++) {
-					if(i == 0) question.setText(args[i]);
-					else buttons.get(random_order.remove(0)).setText(args[i]);
-				}	
-			}
-			if(input.startsWith("res")) {
-				input = input.substring(3);
-				String[] args = input.split(",,");
-				StringBuilder b = new StringBuilder("");
-				for (int i = 0; i < args.length; i++) {
-					String[] temp = args[i].split(",");
-					if(temp[0].equals(id)) b.append("Spieler: " + temp[1] + (b.length() > 0? "":"    "));
-					else b.append("Gegner: " + temp[1] + (b.length() > 0? "":"    "));
-				}
-				result_label.setText(b.toString());
-				try {
-					TimeUnit.SECONDS.sleep(5);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		if(input.startsWith("gam") || input.startsWith("ans")) {
+			input = input.substring(3);
+			enableButtons(true);
+			resetButtonColor();
+			String[] args = input.split(",");
+			current = GameViewHelper.prepareQuestion(input);
+			for (int i = 0; i < 5; i++) {
+				if(i == 0) question.setText(args[i]);
+				else buttons.get(current.getRandomOrder().remove(0)).setText(args[i]);
+			}	
+		}
+		if(input.startsWith("res")) {
+			input = input.substring(3);
+			result_label.setText(GameViewHelper.resultToString(input, id));
+			try {
+				TimeUnit.SECONDS.sleep(7);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}

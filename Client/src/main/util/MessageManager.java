@@ -1,4 +1,4 @@
-package main;
+package main.util;
 
 import java.io.OutputStream;
 
@@ -19,6 +19,7 @@ public class MessageManager {
 			out.write(output);
 			out.flush();
 		} catch (Exception e) {
+			System.err.println("Server not reachable\nIf this problem reoccurs contact the server hoster");
 			System.exit(1);
 		}
 	}

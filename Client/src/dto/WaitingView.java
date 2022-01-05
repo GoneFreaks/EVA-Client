@@ -10,7 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import main.MessageManager;
+import main.util.MessageManager;
 
 public class WaitingView implements View {
 
@@ -98,29 +98,19 @@ public class WaitingView implements View {
 	}
 	
 	public void showData(String input) {
-		if(input.startsWith("#")) id.setText(input.trim());
-		else {
-			String cmd = input.substring(0, 3);
-			String data = input.substring(3);
-			
-			switch (cmd) {
-				case "get": {
+		if(input.startsWith("#") && !id.getText().startsWith("#")) id.setText(input.trim());
+		
+		selection.forEach((k) -> {
+			k.removeAllItems();
+		});
 					
-					selection.forEach((k) -> {
-						k.removeAllItems();
-					});
-					
-					String[] both = data.split(",,");
-					for(int i = 0; i < both.length; i++) {
-						String[] args = both[i].split(",");
-						for (int j = 0; j < args.length; j++) {
-							String temp = args[j].trim();
-							if(temp.equals(id.getText())) continue;
-							selection.get(i).addItem(temp);
-						}
-					}
-					break;
-				}
+		String[] both = input.split(",,");
+		for(int i = 0; i < both.length; i++) {
+			String[] args = both[i].split(",");
+			for (int j = 0; j < args.length; j++) {
+				String temp = args[j].trim();
+				if(temp.equals(id.getText())) continue;
+				selection.get(i).addItem(temp);
 			}
 		}
 	}

@@ -1,6 +1,8 @@
-package main;
+package main.listener;
 
 import java.util.concurrent.TimeUnit;
+
+import main.util.MessageManager;
 
 public class GetThread implements Runnable {
 	

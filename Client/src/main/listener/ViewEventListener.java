@@ -1,7 +1,9 @@
-package main;
+package main.listener;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+
+import main.util.MessageManager;
 
 public class ViewEventListener implements WindowListener{
 

@@ -1,15 +1,15 @@
-package main;
+package main.listener;
 
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
+import main.CommandManager;
+
 public class Listener implements Runnable {
 	
-	private ViewManager viewMan;
 	private InputStream in;
 	
-	public Listener (ViewManager viewMan, InputStream in) {
-		this.viewMan = viewMan;
+	public Listener (InputStream in) {
 		this.in = in;
 	}
 	
@@ -24,7 +24,7 @@ public class Listener implements Runnable {
 					for (int i = 0; i < arr.length; i++) {
 						b.append((char) arr[i]);
 					}
-					viewMan.showData(b.toString());
+					CommandManager.INSTANCE.performCommand(b.toString());
 				}
 				TimeUnit.MILLISECONDS.sleep(10);
 			}
