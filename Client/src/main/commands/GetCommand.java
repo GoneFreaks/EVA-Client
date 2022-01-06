@@ -7,6 +7,6 @@ public class GetCommand implements ServerCommand {
 
 	@Override
 	public void performCommand(String data) throws Exception {
-		if(!ViewManager.INSTANCE.isGame() && data.length() > 3) ViewManager.INSTANCE.showData(data);
+		if(!ViewManager.INSTANCE.isGame()) ViewManager.INSTANCE.showData(data);
 	}
 }

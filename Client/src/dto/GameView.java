@@ -53,7 +53,7 @@ public class GameView implements View{
 		
 		frame.setSize(600, 400);
 		frame.setVisible(true);
-		MessageManager.INSTANCE.sendMessage("gam");
+		MessageManager.INSTANCE.sendMessage("#gam");
 	}
 	
 	private void handleAction(ActionEvent a) {
@@ -65,7 +65,7 @@ public class GameView implements View{
 		new Thread(() -> {
 			try {
 				TimeUnit.SECONDS.sleep(5);
-				MessageManager.INSTANCE.sendMessage("ans" + (current.isCorrect(answer)? 1:0));
+				MessageManager.INSTANCE.sendMessage("#ans" + (current.isCorrect(answer)? 1:0));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -29,7 +29,7 @@ public class Listener implements Runnable {
 						CommandManager.INSTANCE.performCommand(temp[i].trim());
 					}
 				}
-				TimeUnit.MILLISECONDS.sleep(10);
+				TimeUnit.MILLISECONDS.sleep(50);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

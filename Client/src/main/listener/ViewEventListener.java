@@ -14,7 +14,7 @@ public class ViewEventListener implements WindowListener{
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		MessageManager.INSTANCE.sendMessage("delete");
+		MessageManager.INSTANCE.sendMessage("#del");
 	}
 
 	@Override

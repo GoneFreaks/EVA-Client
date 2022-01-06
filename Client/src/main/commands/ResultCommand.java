@@ -12,7 +12,7 @@ public class ResultCommand implements ServerCommand {
 		if(ViewManager.INSTANCE.isGame()) {
 			ViewManager.INSTANCE.showData("res" + data);
 			ViewManager.INSTANCE.setWaitingView();
-			MessageManager.INSTANCE.sendMessage("new");
+			MessageManager.INSTANCE.sendMessage("#new");
 			
 			Thread getThread = new Thread(new GetThread());
 			GetThread.running = true;
