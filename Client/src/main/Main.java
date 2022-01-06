@@ -4,8 +4,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.concurrent.TimeUnit;
 
-import main.listener.GetThread;
-import main.listener.Listener;
+import listener.GetThread;
+import listener.Listener;
 import main.util.MessageManager;
 
 public class Main {

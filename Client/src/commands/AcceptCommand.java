@@ -1,8 +1,8 @@
-package main.commands;
+package commands;
 
+import commands.types.ServerCommand;
+import listener.GetThread;
 import main.ViewManager;
-import main.commands.types.ServerCommand;
-import main.listener.GetThread;
 
 public class AcceptCommand implements ServerCommand {
 

@@ -2,13 +2,13 @@ package main;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-import main.commands.AcceptCommand;
-import main.commands.AnswerCommand;
-import main.commands.GameCommand;
-import main.commands.GetCommand;
-import main.commands.ResultCommand;
-import main.commands.UnlockCommand;
-import main.commands.types.ServerCommand;
+import commands.AcceptCommand;
+import commands.AnswerCommand;
+import commands.GameCommand;
+import commands.GetCommand;
+import commands.ResultCommand;
+import commands.UnlockCommand;
+import commands.types.ServerCommand;
 
 public class CommandManager {
 

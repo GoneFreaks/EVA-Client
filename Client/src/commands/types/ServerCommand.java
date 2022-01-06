@@ -1,4 +1,4 @@
-package main.commands.types;
+package commands.types;
 
 public interface ServerCommand {
 

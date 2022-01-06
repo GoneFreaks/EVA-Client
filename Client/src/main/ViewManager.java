@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import dto.GameView;
 import dto.View;
 import dto.WaitingView;
-import main.listener.ViewEventListener;
+import listener.ViewEventListener;
 
 public class ViewManager {
 

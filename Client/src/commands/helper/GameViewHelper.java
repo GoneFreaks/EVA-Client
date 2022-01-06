@@ -1,4 +1,4 @@
-package main.commands.helper;
+package commands.helper;
 
 import java.util.ArrayList;
 import java.util.Arrays;

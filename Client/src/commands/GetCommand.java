@@ -1,7 +1,7 @@
-package main.commands;
+package commands;
 
+import commands.types.ServerCommand;
 import main.ViewManager;
-import main.commands.types.ServerCommand;
 
 public class GetCommand implements ServerCommand {
 

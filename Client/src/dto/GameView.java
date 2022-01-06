@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import main.commands.helper.GameViewHelper;
+import commands.helper.GameViewHelper;
 import main.util.MessageManager;
 
 public class GameView implements View{
