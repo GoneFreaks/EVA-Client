@@ -1,8 +1,7 @@
 package main;
 
-import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.concurrent.TimeUnit;
 
 import listener.GetThread;
 import listener.Listener;
@@ -10,22 +9,23 @@ import main.util.MessageManager;
 
 public class Main {
 	
+	private static final String[] SERVER_ADDRESS = {"127.0.0.1", "10.0.3.36"}; 
+	
 	public static void main(String[] args) {
-		System.out.println("CLIENT");
+		System.out.println("CLIENT\n");
 		
-		Thread timeout = new Thread(() -> {
-			try {
-				TimeUnit.MILLISECONDS.sleep(3000);
-				System.err.println("It looks like no connection can be established");
-				System.exit(1);
-			} catch (Exception e) {
-			}
-		});
-		timeout.start();
-		
+		for (int i = 0; i < SERVER_ADDRESS.length; i++) {
+			String address = SERVER_ADDRESS[i];
+			System.out.println("Trying to connect to " + address);
+			if(establishConnection(address)) break;
+			System.out.println("Unable to connect to " + address + "\n");
+		}
+	}
+	
+	private static boolean establishConnection(String server_address){
 		try{
-
-			Socket server = new Socket(InetAddress.getByName("127.0.0.1"), 9090);
+			Socket server = new Socket();
+			server.connect(new InetSocketAddress(server_address, 9090), 1000);
 			server.setKeepAlive(true);
 			server.setSoTimeout(5000);
 			new CommandManager();
@@ -39,12 +39,22 @@ public class Main {
 			listener.start();
 			getThread.start();
 			
-			timeout.interrupt();
+			Runtime.getRuntime().addShutdownHook(new Thread() {
+				@Override
+				public void run() {
+					MessageManager.INSTANCE.sendMessage("#del");
+					listener.interrupt();
+					try {
+						server.close();
+					} catch (Exception e) {
+					}
+				}
+			});
+			
+			return true;
 			
 		} catch (Exception e) {
-			timeout.interrupt();
-			e.printStackTrace();
-			return;
+			return false;
 		}
 	}
 }

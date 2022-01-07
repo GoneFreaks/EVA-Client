@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 import dto.GameView;
 import dto.View;
 import dto.WaitingView;
-import listener.ViewEventListener;
 
 public class ViewManager {
 
@@ -54,7 +53,6 @@ public class ViewManager {
 		JFrame init = new JFrame("EVA");
 		init.setResizable(false);
 		init.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		init.addWindowListener(new ViewEventListener());
 		return init;
 	}
 	

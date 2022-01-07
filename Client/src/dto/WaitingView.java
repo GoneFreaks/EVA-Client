@@ -83,7 +83,7 @@ public class WaitingView implements View {
 			}
 		}
 		
-		frame.setSize(600, 400);
+		frame.setSize(900, 600);
 		frame.setVisible(true);
 	}
 	

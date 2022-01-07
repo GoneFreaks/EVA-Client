@@ -51,7 +51,7 @@ public class GameView implements View{
 			}
 		}
 		
-		frame.setSize(600, 400);
+		frame.setSize(900, 600);
 		frame.setVisible(true);
 		MessageManager.INSTANCE.sendMessage("#gam");
 	}

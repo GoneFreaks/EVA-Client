@@ -1,5 +1,6 @@
 package listener;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
@@ -31,8 +32,9 @@ public class Listener implements Runnable {
 				}
 				TimeUnit.MILLISECONDS.sleep(50);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (InterruptedException e) {
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		}
 	}
 }
