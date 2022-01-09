@@ -43,13 +43,13 @@ public class WaitingView implements View {
 		switch (pressed.getText()) {
 			case "REQUEST": {
 				Object value = selection.get(0).getSelectedItem();
-				if(value == null) enableButtons(true);
+				if(value == null || !value.toString().startsWith("@")) enableButtons(true);
 				else MessageManager.INSTANCE.sendMessage("#req" + value);
 				break;
 			}
 			case "ACCEPT": {
 				Object value = selection.get(1).getSelectedItem();
-				if(value == null) enableButtons(true);
+				if(value == null || !value.toString().startsWith("@")) enableButtons(true);
 				else MessageManager.INSTANCE.sendMessage("#acc" + value);
 				break;
 			}
