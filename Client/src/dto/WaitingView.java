@@ -3,6 +3,7 @@ package dto;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -100,19 +101,25 @@ public class WaitingView implements View {
 	public void showData(String input) {
 		if(input.startsWith("@") && !id.getText().startsWith("@")) id.setText(input.trim());
 		
-		selection.forEach((k) -> {
-			k.removeAllItems();
-		});
-					
 		String[] both = input.split(",,");
-		for(int i = 0; i < both.length; i++) {
-			String[] args = both[i].split(",");
-			for (int j = 0; j < args.length; j++) {
-				String temp = args[j].trim();
-				if(temp.equals(id.getText())) continue;
-				selection.get(i).addItem(temp);
+		for (int i = 0; i < both.length; i++) {
+			JComboBox<String> box = selection.get(i);
+			List<String> current = new ArrayList<>();
+			for (int j = 0; j < box.getItemCount(); j++) {
+				current.add(box.getItemAt(j));
 			}
+			modifyComboBox(box, current, Arrays.asList(both[i].split(",")));
 		}
+	}
+	
+	private void modifyComboBox(JComboBox<String> box, List<String> current, List<String> new_input) {
+		for (int i = 0; i < box.getItemCount(); i++) {
+			String item = box.getItemAt(i);
+			if(!new_input.contains(item)) box.removeItem(item);
+		}
+		new_input.forEach((k) -> {
+			if(!current.contains(k) && !k.equals(id.getText())) box.addItem(k);
+		});
 	}
 	
 }

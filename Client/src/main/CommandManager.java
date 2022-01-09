@@ -6,6 +6,7 @@ import commands.AcceptCommand;
 import commands.AnswerCommand;
 import commands.GameCommand;
 import commands.GetCommand;
+import commands.NotifyCommand;
 import commands.ResultCommand;
 import commands.UnlockCommand;
 import commands.types.ServerCommand;
@@ -25,6 +26,7 @@ public class CommandManager {
 		this.storage.put("gam", new GameCommand());
 		this.storage.put("get", new GetCommand());
 		this.storage.put("res", new ResultCommand());
+		this.storage.put("not", new NotifyCommand());
 	}
 	
 	public void performCommand(String input) {
