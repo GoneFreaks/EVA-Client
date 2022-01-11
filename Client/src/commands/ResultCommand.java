@@ -3,7 +3,7 @@ package commands;
 import commands.types.ServerCommand;
 import listener.GetThread;
 import main.ViewManager;
-import main.util.MessageManager;
+import util.MessageManager;
 
 public class ResultCommand implements ServerCommand {
 

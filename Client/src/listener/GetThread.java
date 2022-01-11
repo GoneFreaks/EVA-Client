@@ -2,7 +2,7 @@ package listener;
 
 import java.util.concurrent.TimeUnit;
 
-import main.util.MessageManager;
+import util.MessageManager;
 
 public class GetThread implements Runnable {
 	
@@ -11,7 +11,7 @@ public class GetThread implements Runnable {
 	@Override
 	public void run() {
 		try {
-			while(running) {
+			while(running && !Thread.currentThread().isInterrupted()) {
 				TimeUnit.MILLISECONDS.sleep(2000);
 				MessageManager.INSTANCE.sendMessage("#get");
 			}

@@ -1,6 +1,7 @@
-package dto;
+package util.dto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class QuestionDTO {
@@ -10,30 +11,9 @@ public class QuestionDTO {
 	private String eva00;
 	private String eva01;
 	private String eva02;
-	private List<Integer> random_order;
-	
-	public QuestionDTO() {
-		this.random_order = new ArrayList<>();
-	}
 
 	public String getQuestion() {
 		return question;
-	}
-
-	public String getCorrect() {
-		return correct;
-	}
-
-	public String getEva00() {
-		return eva00;
-	}
-
-	public String getEva01() {
-		return eva01;
-	}
-
-	public String getEva02() {
-		return eva02;
 	}
 	
 	public QuestionDTO ArrayToDTO(String[] args) {
@@ -47,13 +27,14 @@ public class QuestionDTO {
 		return this;
 	}
 	
-	public QuestionDTO setRandomOrder(List<Integer> random_order) {
-		this.random_order = random_order;
-		return this;
-	}
-	
-	public List<Integer> getRandomOrder(){
-		return random_order;
+	public List<String> getRandomOrder(){
+		List<String> result = new ArrayList<>();
+		result.add(correct);
+		result.add(eva00);
+		result.add(eva01);
+		result.add(eva02);
+		Collections.shuffle(result);
+		return result;
 	}
 	
 	public boolean isCorrect(String answer) {

@@ -1,4 +1,4 @@
-package dto;
+package main.view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -10,14 +10,15 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
-import commands.helper.GameViewHelper;
-import main.util.MessageManager;
+import util.MessageManager;
+import util.dto.QuestionDTO;
 
 public class GameView implements View{
 
 	private List<JButton> buttons;
-	private JLabel question;
+	private JTextArea question;
 	private JFrame frame;
 	private QuestionDTO current;
 	private String id;
@@ -34,7 +35,10 @@ public class GameView implements View{
 		for (int i = 1; i < 8; i++) {
 			if(i < 4) {
 				if(i == 2) {
-					question = new JLabel("FRAGE");
+					question = new JTextArea("FRAGE");
+					question.setEditable(false);
+					question.setLineWrap(true);
+					question.setFont(question.getFont().deriveFont(20f));
 					frame.add(question);
 				}
 				else if(i == 1) {
@@ -103,25 +107,27 @@ public class GameView implements View{
 
 	@Override
 	public void showData(String input) {
-		if(input.startsWith("gam") || input.startsWith("ans")) {
-			input = input.substring(3);
-			enableButtons(true);
-			resetButtonColor();
-			String[] args = input.split(",");
-			current = GameViewHelper.prepareQuestion(input);
-			for (int i = 0; i < 5; i++) {
-				if(i == 0) question.setText(args[i]);
-				else buttons.get(current.getRandomOrder().remove(0)).setText(args[i]);
-			}	
+		result_label.setText(input);
+		try {
+			TimeUnit.SECONDS.sleep(7);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		if(input.startsWith("res")) {
-			input = input.substring(3);
-			result_label.setText(GameViewHelper.resultToString(input, id));
-			try {
-				TimeUnit.SECONDS.sleep(7);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+	}
+	
+	@Override
+	public void showData(QuestionDTO questionDTO) {
+		
+		enableButtons(true);
+		resetButtonColor();
+		current = questionDTO;
+		
+		question.setText(questionDTO.getQuestion());
+		List<String> answers = current.getRandomOrder();
+		for (int i = 0; i < 4; i++) {
+			JButton temp = buttons.get(i);
+			temp.setFont(temp.getFont().deriveFont(16f));
+			temp.setText(answers.get(i));
 		}
 	}
 	

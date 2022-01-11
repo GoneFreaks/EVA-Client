@@ -4,8 +4,8 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 import listener.GetThread;
-import listener.Listener;
-import main.util.MessageManager;
+import listener.MessageListener;
+import util.MessageManager;
 
 public class Main {
 	
@@ -32,27 +32,28 @@ public class Main {
 			new MessageManager(server.getOutputStream());
 			new ViewManager();
 			
-			Thread listener = new Thread(new Listener(server.getInputStream()));
+			// Listener for incoming messages
+			Thread messageListener = new Thread(new MessageListener(server.getInputStream()));
+			messageListener.setDaemon(true);
+			messageListener.start();
+			
+			// Retrieve new data from the server
 			Thread getThread = new Thread(new GetThread());
-			listener.setDaemon(true);
 			getThread.setDaemon(true);
-			listener.start();
 			getThread.start();
 			
 			Runtime.getRuntime().addShutdownHook(new Thread() {
 				@Override
 				public void run() {
-					MessageManager.INSTANCE.sendMessage("#del");
-					listener.interrupt();
+					messageListener.interrupt();
+					getThread.interrupt();
 					try {
 						server.close();
 					} catch (Exception e) {
 					}
 				}
 			});
-			
 			return true;
-			
 		} catch (Exception e) {
 			return false;
 		}

@@ -1,4 +1,4 @@
-package dto;
+package main.view;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import main.util.MessageManager;
+import util.MessageManager;
+import util.dto.QuestionDTO;
 
 public class WaitingView implements View {
 
@@ -111,6 +112,9 @@ public class WaitingView implements View {
 			modifyComboBox(box, current, Arrays.asList(both[i].split(",")));
 		}
 	}
+	
+	@Override
+	public void showData(QuestionDTO question) {}
 	
 	private void modifyComboBox(JComboBox<String> box, List<String> current, List<String> new_input) {
 		for (int i = 0; i < box.getItemCount(); i++) {
