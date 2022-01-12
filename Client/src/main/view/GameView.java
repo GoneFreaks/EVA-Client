@@ -28,6 +28,8 @@ public class GameView implements View{
 	public GameView () {
 		this.buttons = new ArrayList<>();
 		this.current = new QuestionDTO();
+		this.wrong = 0;
+		this.correct = 0;
 	}
 	
 	public void start() {
@@ -60,10 +62,15 @@ public class GameView implements View{
 		MessageManager.INSTANCE.sendMessage("#gam");
 	}
 	
+	private int correct;
+	private int wrong;
 	private void handleAction(ActionEvent a) {
 		JButton pressed = (JButton) a.getSource();
 		String answer = pressed.getText();
 		pressed.setBackground(current.isCorrect(answer)? Color.GREEN : Color.RED);
+		if(current.isCorrect(answer)) correct++;
+		else wrong++;
+		result_label.setText("Richtig: " + correct + " " + "Falsch:" + wrong);
 		setCorrectAnswer();
 		enableButtons(false);
 		new Thread(() -> {

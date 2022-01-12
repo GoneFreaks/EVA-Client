@@ -12,7 +12,7 @@ public class GetThread implements Runnable {
 	public void run() {
 		try {
 			while(running && !Thread.currentThread().isInterrupted()) {
-				TimeUnit.MILLISECONDS.sleep(2000);
+				TimeUnit.MILLISECONDS.sleep(100);
 				MessageManager.INSTANCE.sendMessage("#get");
 			}
 		} catch (Exception e) {
