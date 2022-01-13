@@ -14,10 +14,7 @@ public class ResultCommand implements ServerCommand {
 			ViewManager.INSTANCE.setWaitingView();
 			MessageManager.INSTANCE.sendMessage("#new");
 			
-			Thread getThread = new Thread(new GetThread());
-			GetThread.running = true;
-			getThread.setDaemon(true);
-			getThread.start();
+			GetThread.INSTANCE.changeState();
 		}
 	}
 }

@@ -9,6 +9,6 @@ public class AcceptCommand implements ServerCommand {
 	@Override
 	public void performCommand(String data) throws Exception {
 		ViewManager.INSTANCE.setGameView();
-		GetThread.running = false;
+		GetThread.INSTANCE.changeState();
 	}
 }
