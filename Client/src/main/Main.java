@@ -10,7 +10,7 @@ import util.MessageManager;
 
 public class Main {
 	
-	public static final boolean FILTER_OUTPUT = true;
+	public static final boolean FILTER_OUTPUT = false;
 	private static final String[] SERVER_ADDRESS = {"127.0.0.1", "10.0.3.36"}; 
 	
 	public static void main(String[] args) {
