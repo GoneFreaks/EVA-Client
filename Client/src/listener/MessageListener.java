@@ -20,12 +20,14 @@ public class MessageListener implements Runnable {
 		try {
 			while(!Thread.currentThread().isInterrupted()) {
 				if(in.available() > 0) {
-					String[] temp = MessageManager.INSTANCE.receiveMessage();
-					for (int i = 0; i < temp.length; i++) {
-						CommandManager.INSTANCE.performCommand(temp[i].trim());
+					String[] temp = MessageManager.receiveMessage();
+					if(temp != null) {
+						for (int i = 0; i < temp.length; i++) {
+							CommandManager.INSTANCE.performCommand(temp[i].trim());
+						}
 					}
 				}
-				TimeUnit.MILLISECONDS.sleep(50);
+				TimeUnit.MILLISECONDS.sleep(100);
 			}
 		} catch (InterruptedException e) {
 		} catch (IOException ex) {

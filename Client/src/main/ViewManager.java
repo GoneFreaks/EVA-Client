@@ -13,30 +13,27 @@ import main.view.WaitingView;
 import util.dto.QuestionDTO;
 
 public class ViewManager {
-
-	public static ViewManager INSTANCE;
 	
 	private static JFrame frame;
-	private View view;
-	private boolean isGame = false;
-	private String id;
+	private static View view;
+	private static boolean isGame = false;
+	private static String id;
 	
-	public ViewManager () {
-		INSTANCE = this;
+	public static void initialize () {
 		frame = initFrame();
 		view = new WaitingView();
 		view.setFrame(frame, null).start();
 	}
 	
-	public boolean isGame() {
+	public static boolean isGame() {
 		return isGame;
 	}
 	
-	public void enableButtons(boolean state) {
+	public static void enableButtons(boolean state) {
 		view.enableButtons(state);
 	}
 	
-	public void showData(String input) {
+	public static void showData(String input) {
 		
 		String cmd = input.substring(0, 3);
 		String data = input.substring(3);
@@ -46,7 +43,7 @@ public class ViewManager {
 		}
 		case "ans": {
 			String[] args = data.split(",");
-			view.showData(new QuestionDTO().ArrayToDTO(args));
+			view.showData(new QuestionDTO(args));
 			break;
 		}
 		case "res": {
@@ -69,7 +66,7 @@ public class ViewManager {
 		}
 	}
 	
-	public void setWaitingView() {
+	public static void setWaitingView() {
 		isGame = false;
 		frame = initFrame();
 		String id = view.shutdown();
@@ -77,7 +74,7 @@ public class ViewManager {
 		view.setFrame(frame, id).start();
 	}
 	
-	public void setGameView() {
+	public static void setGameView() {
 		isGame = true;
 		frame = initFrame();
 		String id = view.shutdown();
@@ -85,7 +82,7 @@ public class ViewManager {
 		view.setFrame(frame, id).start();
 	}
 	
-	public JFrame initFrame() {
+	private static JFrame initFrame() {
 		JFrame init = new JFrame("EVA");
 		init.setResizable(false);
 		init.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -16,7 +16,7 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("CLIENT\n");
 		
-		Filter.filter();
+		Filter.filterOutputStreams();
 		
 		for (int i = 0; i < SERVER_ADDRESS.length; i++) {
 			String address = SERVER_ADDRESS[i];
@@ -33,8 +33,8 @@ public class Main {
 			server.setKeepAlive(true);
 			server.setSoTimeout(5000);
 			new CommandManager();
-			new MessageManager(server.getInputStream(), server.getOutputStream());
-			new ViewManager();
+			MessageManager.setStreams(server.getInputStream(), server.getOutputStream());
+			ViewManager.initialize();
 			
 			// Listener for incoming messages
 			Thread messageListener = new Thread(new MessageListener(server.getInputStream()));

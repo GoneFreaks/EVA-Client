@@ -7,7 +7,7 @@ import main.Main;
 
 public class Filter {
 
-	public static void filter() {
+	public static void filterOutputStreams() {
 		if(Main.FILTER_OUTPUT) {
 			System.setErr(new Interceptor(System.err));
 			System.setOut(new Interceptor(System.out));

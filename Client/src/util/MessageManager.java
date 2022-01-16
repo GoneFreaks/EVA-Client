@@ -4,19 +4,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class MessageManager {
-
-	public static MessageManager INSTANCE;
 	
-	private InputStream in;
-	private OutputStream out;
+	private static InputStream in;
+	private static OutputStream out;
 	
-	public MessageManager(InputStream in, OutputStream out) {
-		INSTANCE = this;
-		this.in = in;
-		this.out = out;
+	public static void setStreams(InputStream input, OutputStream output) {
+		in = input;
+		out = output;
 	}
 	
-	public void sendMessage(String message) {
+	public static void sendMessage(String message) {
 		byte[] output = message.getBytes();
 		try {
 			out.write(output);
@@ -27,7 +24,7 @@ public class MessageManager {
 		}
 	}
 	
-	public String[] receiveMessage() {
+	public static String[] receiveMessage() {
 		try {
 			byte[] arr = new byte[in.available()];
 			in.read(arr, 0, in.available());
@@ -40,7 +37,6 @@ public class MessageManager {
 		} catch (Exception e) {
 			return null;
 		}
-		
 	}
 	
 }

@@ -15,7 +15,7 @@ public class GetThread implements Runnable {
 	private synchronized void send() {
 		try {
 			while(waiting) wait();
-			MessageManager.INSTANCE.sendMessage("#get");
+			MessageManager.sendMessage("#get");
 		} catch (Exception e) {
 		}
 	}

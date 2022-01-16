@@ -7,6 +7,6 @@ public class UnlockCommand implements ServerCommand {
 
 	@Override
 	public void performCommand(String data) throws Exception {
-		ViewManager.INSTANCE.enableButtons(true);
+		ViewManager.enableButtons(true);
 	}
 }

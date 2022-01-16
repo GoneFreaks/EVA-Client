@@ -12,11 +12,7 @@ public class QuestionDTO {
 	private String eva01;
 	private String eva02;
 
-	public String getQuestion() {
-		return question;
-	}
-	
-	public QuestionDTO ArrayToDTO(String[] args) {
+	public QuestionDTO(String[] args) {
 		if(args.length == 5) {
 			question = args[0];
 			correct = args[1];
@@ -24,7 +20,10 @@ public class QuestionDTO {
 			eva01 = args[3];
 			eva02 = args[4];
 		}
-		return this;
+	}
+	
+	public String getQuestion() {
+		return question;
 	}
 	
 	public List<String> getRandomOrder(){

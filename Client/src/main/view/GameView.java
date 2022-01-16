@@ -27,7 +27,6 @@ public class GameView implements View{
 	
 	public GameView () {
 		this.buttons = new ArrayList<>();
-		this.current = new QuestionDTO();
 		this.wrong = 0;
 		this.correct = 0;
 	}
@@ -59,7 +58,7 @@ public class GameView implements View{
 		
 		frame.setSize(900, 600);
 		frame.setVisible(true);
-		MessageManager.INSTANCE.sendMessage("#gam");
+		MessageManager.sendMessage("#gam");
 	}
 	
 	private int correct;
@@ -76,7 +75,7 @@ public class GameView implements View{
 		new Thread(() -> {
 			try {
 				TimeUnit.SECONDS.sleep(5);
-				MessageManager.INSTANCE.sendMessage("#ans" + (current.isCorrect(answer)? 1:0));
+				MessageManager.sendMessage("#ans" + (current.isCorrect(answer)? 1:0));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
