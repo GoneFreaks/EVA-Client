@@ -20,6 +20,7 @@ public class GetThread implements Runnable {
 		}
 	}
 	
+	// "deactivate" thread --> not needed during game
 	public synchronized void changeState() {
 		waiting = !waiting;
 		if(!waiting) notifyAll();
