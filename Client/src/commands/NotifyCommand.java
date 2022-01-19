@@ -1,8 +1,8 @@
 package commands;
 
-import commands.types.ServerCommand;
+import commands.types.ClientCommand;
 
-public class NotifyCommand implements ServerCommand {
+public class NotifyCommand implements ClientCommand {
 	@Override
 	public void performCommand(String data) throws Exception {}
 }

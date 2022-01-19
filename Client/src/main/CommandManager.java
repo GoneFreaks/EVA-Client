@@ -9,13 +9,13 @@ import commands.GetCommand;
 import commands.NotifyCommand;
 import commands.ResultCommand;
 import commands.UnlockCommand;
-import commands.types.ServerCommand;
+import commands.types.ClientCommand;
 
 public class CommandManager {
 
 	public static CommandManager INSTANCE;
 	
-	private ConcurrentHashMap<String, ServerCommand> storage;
+	private ConcurrentHashMap<String, ClientCommand> storage;
 	
 	public CommandManager() {
 		INSTANCE = this;

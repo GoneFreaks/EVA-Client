@@ -1,9 +1,9 @@
 package commands;
 
-import commands.types.ServerCommand;
+import commands.types.ClientCommand;
 import main.ViewManager;
 
-public class GetCommand implements ServerCommand {
+public class GetCommand implements ClientCommand {
 
 	@Override
 	public void performCommand(String data) throws Exception {

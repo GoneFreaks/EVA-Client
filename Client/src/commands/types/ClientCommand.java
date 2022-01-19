@@ -1,6 +1,6 @@
 package commands.types;
 
-public interface ServerCommand {
+public interface ClientCommand {
 
 	public void performCommand(String data) throws Exception;
 	

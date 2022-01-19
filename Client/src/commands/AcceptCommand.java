@@ -1,10 +1,10 @@
 package commands;
 
-import commands.types.ServerCommand;
+import commands.types.ClientCommand;
 import listener.GetThread;
 import main.ViewManager;
 
-public class AcceptCommand implements ServerCommand {
+public class AcceptCommand implements ClientCommand {
 
 	@Override
 	public void performCommand(String data) throws Exception {
