@@ -1,9 +1,9 @@
-package util;
+package client.util;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-import main.Main;
+import client.Main;
 
 public class Filter {
 

@@ -1,4 +1,4 @@
-package commands.types;
+package client.commands.types;
 
 public interface ClientCommand {
 

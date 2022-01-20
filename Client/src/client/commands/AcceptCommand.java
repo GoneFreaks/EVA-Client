@@ -1,8 +1,8 @@
-package commands;
+package client.commands;
 
-import commands.types.ClientCommand;
-import listener.GetThread;
-import main.ViewManager;
+import client.ViewManager;
+import client.commands.types.ClientCommand;
+import client.listener.GetThread;
 
 public class AcceptCommand implements ClientCommand {
 

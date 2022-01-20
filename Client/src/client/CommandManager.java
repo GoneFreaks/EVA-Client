@@ -1,15 +1,15 @@
-package main;
+package client;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-import commands.AcceptCommand;
-import commands.AnswerCommand;
-import commands.GameCommand;
-import commands.GetCommand;
-import commands.NotifyCommand;
-import commands.ResultCommand;
-import commands.UnlockCommand;
-import commands.types.ClientCommand;
+import client.commands.AcceptCommand;
+import client.commands.AnswerCommand;
+import client.commands.GameCommand;
+import client.commands.GetCommand;
+import client.commands.NotifyCommand;
+import client.commands.ResultCommand;
+import client.commands.UnlockCommand;
+import client.commands.types.ClientCommand;
 
 public class CommandManager {
 

@@ -1,12 +1,12 @@
-package main;
+package client;
 
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-import listener.GetThread;
-import listener.MessageListener;
-import util.Filter;
-import util.MessageManager;
+import client.listener.GetThread;
+import client.listener.MessageListener;
+import client.util.Filter;
+import client.util.MessageManager;
 
 public class Main {
 	

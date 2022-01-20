@@ -1,4 +1,4 @@
-package main.view;
+package client.view;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,8 +10,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import util.MessageManager;
-import util.dto.QuestionDTO;
+import client.util.MessageManager;
+import client.util.dto.QuestionDTO;
 
 public class WaitingView implements View {
 

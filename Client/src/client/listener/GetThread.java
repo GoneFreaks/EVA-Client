@@ -1,6 +1,6 @@
-package listener;
+package client.listener;
 
-import util.MessageManager;
+import client.util.MessageManager;
 
 public class GetThread implements Runnable {
 	

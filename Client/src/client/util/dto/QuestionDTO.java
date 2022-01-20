@@ -1,4 +1,4 @@
-package util.dto;
+package client.util.dto;
 
 import java.util.ArrayList;
 import java.util.Collections;

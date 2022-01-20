@@ -1,4 +1,4 @@
-package main.view;
+package client.view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -12,8 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
-import util.MessageManager;
-import util.dto.QuestionDTO;
+import client.util.MessageManager;
+import client.util.dto.QuestionDTO;
 
 public class GameView implements View{
 

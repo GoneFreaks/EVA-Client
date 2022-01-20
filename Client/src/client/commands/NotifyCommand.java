@@ -1,6 +1,6 @@
-package commands;
+package client.commands;
 
-import commands.types.ClientCommand;
+import client.commands.types.ClientCommand;
 
 public class NotifyCommand implements ClientCommand {
 	@Override

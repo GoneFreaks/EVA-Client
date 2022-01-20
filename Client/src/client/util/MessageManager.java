@@ -1,4 +1,4 @@
-package util;
+package client.util;
 
 import java.io.InputStream;
 import java.io.OutputStream;

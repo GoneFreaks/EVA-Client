@@ -1,9 +1,9 @@
-package listener;
+package client.listener;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import util.MessageManager;
+import client.util.MessageManager;
 
 public class WindowEventListener implements WindowListener{
 

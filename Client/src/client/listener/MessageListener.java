@@ -1,11 +1,11 @@
-package listener;
+package client.listener;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
-import main.CommandManager;
-import util.MessageManager;
+import client.CommandManager;
+import client.util.MessageManager;
 
 public class MessageListener implements Runnable {
 	

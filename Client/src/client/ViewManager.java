@@ -1,4 +1,4 @@
-package main;
+package client;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -6,11 +6,11 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import listener.WindowEventListener;
-import main.view.GameView;
-import main.view.View;
-import main.view.WaitingView;
-import util.dto.QuestionDTO;
+import client.listener.WindowEventListener;
+import client.util.dto.QuestionDTO;
+import client.view.GameView;
+import client.view.View;
+import client.view.WaitingView;
 
 public class ViewManager {
 	

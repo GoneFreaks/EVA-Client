@@ -1,7 +1,7 @@
-package commands;
+package client.commands;
 
-import commands.types.ClientCommand;
-import main.ViewManager;
+import client.ViewManager;
+import client.commands.types.ClientCommand;
 
 public class AnswerCommand implements ClientCommand {
 

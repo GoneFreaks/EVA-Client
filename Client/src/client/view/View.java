@@ -1,8 +1,8 @@
-package main.view;
+package client.view;
 
 import javax.swing.JFrame;
 
-import util.dto.QuestionDTO;
+import client.util.dto.QuestionDTO;
 
 public interface View {
 
