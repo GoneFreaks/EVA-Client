@@ -122,6 +122,7 @@ public class WaitingView implements View {
 	@Override
 	public void showData(QuestionDTO question) {}
 	
+	// only add new items and remove items not in new_input
 	private void modifyComboBox(JComboBox<String> box, List<String> current, List<String> new_input) {
 		
 		for (int i = 0; i < box.getItemCount(); i++) {
