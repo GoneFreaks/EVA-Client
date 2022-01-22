@@ -4,6 +4,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import client.commands.AcceptCommand;
 import client.commands.AnswerCommand;
+import client.commands.DeleteCommand;
 import client.commands.GameCommand;
 import client.commands.GetCommand;
 import client.commands.NotifyCommand;
@@ -27,6 +28,7 @@ public class CommandManager {
 		this.storage.put("get", new GetCommand());
 		this.storage.put("res", new ResultCommand());
 		this.storage.put("not", new NotifyCommand());
+		this.storage.put("del", new DeleteCommand());
 	}
 	
 	public void performCommand(String input) {
